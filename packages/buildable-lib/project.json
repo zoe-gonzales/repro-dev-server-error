@@ -1,0 +1,19 @@
+{
+  "name": "buildable-lib",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/buildable-lib/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/buildable-lib",
+        "main": "packages/buildable-lib/src/index.ts",
+        "tsConfig": "packages/buildable-lib/tsconfig.lib.json",
+        "assets": ["packages/buildable-lib/*.md"]
+      }
+    }
+  }
+}
