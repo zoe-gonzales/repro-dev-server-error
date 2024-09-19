@@ -5,5 +5,37 @@
   "projectType": "application",
   "tags": [],
   "// targets": "to see all targets run: nx show project repro-dev-server-error-app --web",
-  "targets": {}
+  "targets": {
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "options": {
+        "buildTarget": "repro-dev-server-error-app:build:production"
+      }
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "dependsOn": ["^build"],
+      "options": {
+        "target": "web",
+        "outputPath": "dist/apps/repro-dev-server-error-app",
+        "compiler": "swc",
+        "main": "apps/repro-dev-server-error-app/src/main.tsx",
+        "tsConfig": "apps/repro-dev-server-error-app/tsconfig.app.json",
+        "webpackConfig": "apps/repro-dev-server-error-app/webpack.config.js",
+        "buildLibsFromSource": false
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    }
+  }
 }
